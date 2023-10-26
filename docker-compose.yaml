@@ -1,0 +1,40 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      target: development
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file:
+      - ./backend/env/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+    restart: on-failure
+    volumes:
+      - ./backend:/app
+    networks:
+      - backend_network
+      - postgres_network
+
+  postgres:
+    image: postgres:15.1
+    volumes:
+      - backend_db_volume:/var/lib/postgresql/data
+    env_file:
+      - ./backend/env/.env
+    ports:
+      - "5432:5432"
+    networks:
+      - postgres_network
+
+volumes:
+  backend_db_volume:
+
+
+networks:
+  postgres_network:
+    driver: bridge
+  backend_network:
+    driver: bridge
+

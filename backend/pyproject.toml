@@ -1,0 +1,30 @@
+[tool.poetry]
+name = "url-shortener"
+version = "0.1.0"
+description = ""
+authors = ["marcin"]
+readme = "README.md"
+packages = [{include = "url_shortener"}]
+
+[tool.poetry.dependencies]
+python = "3.11.1"
+asgiref = "^3.7.2"
+attrs = "^23.1.0"
+dj-database-url = "^2.1.0"
+django = "^4.2.6"
+django-environ = "^0.11.2"
+iniconfig = "^2.0.0"
+packaging = "^23.2"
+pluggy = "^1.3.0"
+psycopg2-binary = "^2.9.9"
+py = "^1.11.0"
+pyparsing = "^3.1.1"
+pytest = "^7.4.3"
+pytest-django = "^4.5.2"
+sqlparse = "^0.4.4"
+tomli = "^2.0.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
