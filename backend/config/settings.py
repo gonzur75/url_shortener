@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party
+    'rest_framework',
     # local
     'url_shortener.apps.UrlShortenerConfig',
     'users.apps.UserConfig',

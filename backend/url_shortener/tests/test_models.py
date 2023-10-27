@@ -16,6 +16,6 @@ def test_short_url_in_database(short_url):
 def test_short_url_token_max_length(db, short_url):
 
     with pytest.raises(DataError) as excinfo:
-        ShortUrl.objects.create(url=URL, token="test token too long")
+        ShortUrl.objects.create()
 
         assert "value too long for type character varying(8)" in str(excinfo.value)
