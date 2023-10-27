@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 3rd party
     # local
+    'url_shortener.apps.UrlShortenerConfig',
     'users.apps.UserConfig',
 ]
 

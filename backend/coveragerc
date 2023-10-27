@@ -9,4 +9,5 @@ omit =
     *asgi.py,
     *test.py,
     manage.py,
-    *scripts/*.py
+    *scripts/*.py,
+    install-poetry.py,
