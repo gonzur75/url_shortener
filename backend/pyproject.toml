@@ -44,8 +44,14 @@ addopts = [
     "--cov-fail-under=80"
 ]
 
-[tool.pytest.markers]
-slow = "Run slow unit test e.g. for models"
-unit = "Run unit tests"
-smoke = "Run core unit tests"
-dbtest = "Run database tests"
+markers = [
+    'models: Run unit tests for models.',
+    'serializers: Run unit tests for serializers.',
+    'viewsets: Run unit tests for views.',
+]
+
+#models = "Run unit tests for models."
+#serializers = "Run unit tests for serializers."
+#views = "Run unit tests for views."
+
+
