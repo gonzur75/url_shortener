@@ -8,8 +8,8 @@ TOKEN = '1234'
 
 
 @pytest.fixture
-def short_url():
-    short_url = ShortUrl(url=URL, token=TOKEN)
+def short_url(db):
+    short_url = ShortUrl.objects.create(url=URL, token=TOKEN)
     return short_url
 
 
