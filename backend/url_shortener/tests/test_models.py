@@ -1,6 +1,4 @@
 import pytest
-from django.db import DataError
-
 from conftest import TOKEN, URL
 from url_shortener.models import ShortUrl
 

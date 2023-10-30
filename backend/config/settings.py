@@ -30,7 +30,6 @@ SECRET_KEY = os.environ.get('DJ_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DJ_DEBUG', False))
 
-
 ALLOWED_HOSTS = os.environ.get('DJ_ALLOWED_HOSTS', '').split()
 
 # Application definition
@@ -93,7 +92,6 @@ DATABASES = {
 
 DATABASE_URL = os.environ.get('DB_CONNECTION_STRING')
 
-
 db_config = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=False)
 DATABASES['default'].update(db_config)
 
@@ -142,5 +140,5 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5
+    'PAGE_SIZE': 100,
 }

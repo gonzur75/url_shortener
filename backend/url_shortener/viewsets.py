@@ -6,15 +6,16 @@ from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.response import Response
 
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
+from url_shortener.helpers import token_handler
 from url_shortener.models import ShortUrl
 from url_shortener.serializers import ShortUrlSerializer, ShortUrlListSerializer
 
 
 class ShortUrlViewSet(viewsets.ModelViewSet):
     queryset = ShortUrl.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
     serializer_class = ShortUrlSerializer
 
     def get_queryset(self):
@@ -26,14 +27,11 @@ class ShortUrlViewSet(viewsets.ModelViewSet):
         serializer = ShortUrlListSerializer(queryset, context={'request': request}, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-
     def create(self, request, *args):
         result = ShortUrlSerializer(data=request.data)
         if result.is_valid(raise_exception=True):
-            characters = string.ascii_letters + string.digits
-            token = ''.join(secrets.choice(characters) for i in range(8))
+            token = token_handler()
             url = result.data.get('url')
-
             ShortUrl.objects.create(author=request.user, url=url, token=token)
             absolute_url = f'{request.build_absolute_uri()}{token}'
             data = {

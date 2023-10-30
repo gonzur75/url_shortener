@@ -51,4 +51,3 @@ def test_list_url_shortener_viewset(api_request_factory, user, short_url):
 
     assert response.status_code == status.HTTP_200_OK
     assert obj.url in response.data[0].get('url')
-
