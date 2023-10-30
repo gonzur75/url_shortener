@@ -30,7 +30,6 @@ SECRET_KEY = os.environ.get('DJ_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = int(os.environ.get('DJ_DEBUG', False))
 
-
 ALLOWED_HOSTS = os.environ.get('DJ_ALLOWED_HOSTS', '').split()
 
 # Application definition
@@ -43,7 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # 3rd party
+    'rest_framework',
     # local
+    'url_shortener.apps.UrlShortenerConfig',
     'users.apps.UserConfig',
 ]
 
@@ -91,7 +92,6 @@ DATABASES = {
 
 DATABASE_URL = os.environ.get('DB_CONNECTION_STRING')
 
-
 db_config = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=False)
 DATABASES['default'].update(db_config)
 
@@ -136,5 +136,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 AUTH_USER_MODEL = 'users.CustomUser'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100,
+}
